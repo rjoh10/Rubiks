@@ -15,12 +15,17 @@ public class RoobikFace
         String output="";
         for(int i=0; i<3; i++){
             for(int j=0; j<3; j++){
-                colrArray[i][j] = color.substring(0, 1).charAt(0);
+                if (color !=""){
+                    colrArray[i][j] = color.substring(0, 1).charAt(0);
+                }
+                else{
+                    colrArray[i][j] = ' ';
+                }
+
                 output +=colrArray[i][j]+" ";
             }
             output+= "\n";
         }
-//        return color.substring(0, 1);
         return output;
     }
 }
