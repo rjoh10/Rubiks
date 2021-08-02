@@ -31,6 +31,33 @@ public class RoobikCube
         this.outputArray = new char[12][12];
 
     }
+//New method for Part4
+    RoobikCube turnCW()
+    {
+        int rows = faces.length;
+        int cols = faces[0].length;
+        RoobikFace[][] rotatedCW = new RoobikFace[rows][cols];
+        for (int i = 0; i<rows; i++){
+            for (int j = 0; j<cols; j++){
+                rotatedCW[i][j] = faces[j][cols - i - 1];
+            }
+        }
+        return new RoobikCube(rotatedCW);
+    }
+    
+//New method for Part4
+    RoobikCube turnCCW()
+    {
+        int rows = faces.length;
+        int cols = faces[0].length;
+        RoobikFace[][] rotatedCCW = new RoobikFace[rows][cols];
+        for (int i = 0; i<rows; i++){
+            for (int j = 0; j<cols; j++){
+                rotatedCCW[i][j] = faces[rows - j - 1][i];
+            }
+        }
+        return new RoobikCube(rotatedCCW);
+    }
 
     RoobikCube turnLeft()
     {
@@ -94,11 +121,9 @@ public class RoobikCube
         String output="";
         for(int i=0; i<4; i++){
             for(int j=0; j<4; j++){
-                roobikFaceArray[i][j] = this.faces[i][j];
-                createOutputArray(i,j,this.faces[i][j].toString().charAt(0));
+                createOutputArray(i,j,this.faces[i][j].getColrArray());
             }
         }
-//        System.out.println(outputArray);
         int row = outputArray.length;
         int col = outputArray[0].length;
         for(int i=0; i<row;i++){
@@ -110,13 +135,12 @@ public class RoobikCube
         return output;
     }
 
-    private void createOutputArray(int rows, int cols, char faceColor){
+    private void createOutputArray(int rows, int cols, char[][] face){
         for(int row=3*rows; row<3*rows+3; row++){
             for(int col=3*cols; col<3*cols+3; col++){
-                outputArray[row][col] = faceColor;
+                outputArray[row][col]=face[row%3][col%3];
             }
         }
-
     }
     
 }
